@@ -1,12 +1,17 @@
 package com.sensorcon.sdhelper;
 
+import java.util.Calendar;
 import java.util.Set;
 
+import com.example.sensordronetest.MainActivity;
+import com.example.sensordronetest.sensorService;
 import com.sensorcon.sensordrone.Drone;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.PendingIntent;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -17,6 +22,7 @@ import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
+import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -44,7 +50,7 @@ public class SDHelper {
 	private IntentFilter btFilter;
 	private Dialog scanDialog; // The Dialog we will display results in
 	private AlertDialog.Builder dBuilder; // A builder for the Dialog
-
+	
 	/**
 	 * We will use this to scan for MAC addresses
 	 * 
@@ -58,7 +64,7 @@ public class SDHelper {
 	 */
 	public void scanToConnect(final Drone drone, final Activity activity,
 			final Context context, boolean includePairedDevices) {
-
+		
 		// Set up our Bluetooth Adapter
 		btAdapter = BluetoothAdapter.getDefaultAdapter();
 
@@ -214,7 +220,9 @@ public class SDHelper {
 						});
 
 					}
+					
 				}
+				
 
 			}
 		});

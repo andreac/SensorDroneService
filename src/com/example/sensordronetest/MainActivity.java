@@ -60,6 +60,7 @@ public class MainActivity extends Activity {
 	static final public String READ_PARAMETERS = "com.sensorDroneTest.READ_PARAMETERS";
 	BroadcastReceiver receiver;
 	IntentFilter uiFilter;
+	public SDHelper myHelper = new SDHelper();
 	
 	
 	@Override
@@ -98,7 +99,15 @@ public class MainActivity extends Activity {
 		service.setOnClickListener(new OnClickListener() {
 		    public void onClick(View v)
 		    {
-				final AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);  
+				
+//		    	myDrone = new Drone();
+//		    	myHelper.scanToConnect(myDrone, MainActivity.this, cxt, false);
+//		    
+		    	
+		    	
+		    	
+		    	
+		    	final AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);  
 				  
 				final Calendar TIME = Calendar.getInstance();
 				TIME.set(Calendar.MINUTE, 0);
@@ -144,6 +153,8 @@ public class MainActivity extends Activity {
 		    uiFilter = new IntentFilter(READ_PARAMETERS);
 		    cxt.registerReceiver(receiver, uiFilter);
 	}
+	
+	
 	
 	private void updateLabel(int id, String msg){
 		TextView tmp = (TextView)findViewById(id);

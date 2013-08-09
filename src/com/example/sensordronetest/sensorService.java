@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.EventObject;
 
 import com.sensorcon.sdhelper.ConnectionBlinker;
+import com.sensorcon.sdhelper.SDHelper;
 import com.sensorcon.sdhelper.SDStreamer;
 import com.sensorcon.sensordrone.Drone;
 import com.sensorcon.sensordrone.Drone.DroneEventListener;
@@ -186,7 +187,8 @@ public class sensorService extends Service {
 								else
 								{
 									Log.d(TAGC, "device connect");
-									//getApplicationContext().unregisterReceiver(btReceiver);
+									btAdapter.cancelDiscovery();
+									context.unregisterReceiver(btReceiver);
 								}
 							}
 						}
@@ -302,6 +304,7 @@ public class sensorService extends Service {
 				
 				Log.d(TAG, "Connection lost! Trying to re-connect!");
 				alertMessage("Connection Lost!!");
+				doOnDisconnect();
 				// Try to reconnect once, automatically
 				/*if (myDrone.btConnect(myDrone.lastMAC)) {
 					// A brief pause
@@ -328,6 +331,7 @@ public class sensorService extends Service {
 				//quickMessage("Disconnected!");
 				Log.d(TAG,"Disconnected");
 				alertMessage("Sensor Disconnected!!");
+				doOnDisconnect();
 			}
 
 			@Override
@@ -603,7 +607,7 @@ public class sensorService extends Service {
 		if (myDrone.isConnected) {
 			myDrone.disconnect();
 		}
-		unregisterReceiver(btReceiver);
+		
 		//myDrone = null;
 		//cxt.unregisterReceiver(btReceiver);
 		//getApplicationContext().unregisterReceiver(btReceiver);
