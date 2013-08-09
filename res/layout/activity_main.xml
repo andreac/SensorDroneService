@@ -1,0 +1,278 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+    <Button
+        android:id="@+id/btnService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Connect" />
+
+    <Button
+        android:id="@+id/btnDisconnect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnService"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:text="Disconnect" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnDisconnect"
+        android:id="@+id/mainLayout"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_margin="1dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/TitleTmp"
+                android:gravity="left"
+                android:minWidth="85dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Temp:" />
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:id="@+id/txtTmp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Disabled" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:layout_margin="1dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/TitleHum"
+                android:gravity="left"
+                android:minWidth="85dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Humidity:" />
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:id="@+id/txtHum"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Disabled" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:layout_margin="1dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/TitlePres"
+                android:gravity="left"
+                android:minWidth="85dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Pressure:" />
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:id="@+id/txtPre"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Disabled" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:layout_margin="1dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/TitleIRTemp"
+                android:gravity="left"
+                android:minWidth="85dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="IR Temp:" />
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:id="@+id/txtIRTemp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Disabled" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:layout_margin="1dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/TitleRGBC"
+                android:gravity="left"
+                android:minWidth="85dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Lux" />
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:id="@+id/txtRGBC"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Disabled" />
+        </LinearLayout>
+        
+        
+        <LinearLayout
+            android:layout_margin="1dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/TitleGas"
+                android:gravity="left"
+                android:minWidth="85dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="GAS:" />
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:id="@+id/txtGas"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Disabled" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:layout_margin="1dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/TitleCap"
+                android:gravity="left"
+                android:minWidth="85dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Capacitance:" />
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:id="@+id/txtCap"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Disabled" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:layout_margin="1dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/TitleADC"
+                android:gravity="left"
+                android:minWidth="85dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Volts:" />
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:id="@+id/txtADC"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Disabled" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:layout_margin="1dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/TitleAlt"
+                android:gravity="left"
+                android:minWidth="85dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Altitude:" />
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:id="@+id/txtAlt"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Disabled" />
+        </LinearLayout>
+        
+        
+        <LinearLayout
+            android:layout_margin="1dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/TitleUpdate"
+                android:gravity="left"
+                android:minWidth="85dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="last Update:" />
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:id="@+id/txtUpdate"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="" />
+        </LinearLayout>
+        
+    </LinearLayout>
+	
+    <TextView android:id="@+id/txtConnect"
+        		android:layout_below="@+id/mainLayout"
+                android:gravity="center"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="" />
+    
+    
+</RelativeLayout>
