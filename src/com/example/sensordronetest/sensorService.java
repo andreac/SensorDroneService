@@ -87,8 +87,7 @@ public class sensorService extends Service {
 			this.droidEventListener();
 			
 			myDrone.registerDroneEventListener(deListener);
-			//myDrone.registerDroneStatusListener(dsListener);
-		
+			
 			connect(myDrone, this);
 		}
 		else if (!myDrone.isConnected)
@@ -187,8 +186,7 @@ public class sensorService extends Service {
 								else
 								{
 									Log.d(TAGC, "device connect");
-									btAdapter.cancelDiscovery();
-									context.unregisterReceiver(btReceiver);
+									
 								}
 							}
 						}
@@ -287,6 +285,11 @@ public class sensorService extends Service {
 					streamerArray[i].enable();
 					// Enable the sensor					
 				}
+				
+				
+				btAdapter.cancelDiscovery();
+				cxt.unregisterReceiver(btReceiver);
+				
 				//service.setVisibility(View.VISIBLE);
 				
 				

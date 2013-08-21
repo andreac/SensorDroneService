@@ -16,23 +16,42 @@
         android:layout_centerHorizontal="true"
         android:text="Connect" />
 
-    <Button
-        android:id="@+id/btnDisconnect"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnService"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp"
-        android:text="Disconnect" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnDisconnect"
+        android:layout_below="@+id/btnService"
         android:id="@+id/mainLayout"
+        android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         android:orientation="vertical" >
+		
+        
+        <LinearLayout
+            android:layout_margin="1dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
 
+            <TextView
+                android:id="@+id/TitleTmp"
+                android:gravity="left"
+                android:minWidth="85dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Mac Address:" />
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:id="@+id/txtMAC"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Disabled" />
+        </LinearLayout>
+        
+        
         <LinearLayout
             android:layout_margin="1dp"
             android:layout_width="wrap_content"
@@ -125,28 +144,7 @@
                 android:text="Disabled" />
         </LinearLayout>
         
-        <LinearLayout
-            android:layout_margin="1dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/TitleRGBC"
-                android:gravity="left"
-                android:minWidth="85dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Lux" />
-
-            <TextView
-                android:layout_marginLeft="10dp"
-                android:id="@+id/txtRGBC"
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Disabled" />
-        </LinearLayout>
+        
         
         
         <LinearLayout
@@ -179,21 +177,47 @@
             android:orientation="horizontal" >
 
             <TextView
-                android:id="@+id/TitleCap"
+                android:id="@+id/TitleGas"
                 android:gravity="left"
                 android:minWidth="85dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Capacitance:" />
+                android:text="Reducing GAS:" />
 
             <TextView
                 android:layout_marginLeft="10dp"
-                android:id="@+id/txtCap"
+                android:id="@+id/txtRGas"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Disabled" />
         </LinearLayout>
+        
+        
+        <LinearLayout
+            android:layout_margin="1dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/TitleGas"
+                android:gravity="left"
+                android:minWidth="85dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Oxidizing GAS:" />
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:id="@+id/txtOGas"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Disabled" />
+        </LinearLayout>
+        
+        
         
         <LinearLayout
             android:layout_margin="1dp"
