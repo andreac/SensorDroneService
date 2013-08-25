@@ -12,7 +12,7 @@
   limitations under the License.
 */
 
-package com.example.sensordronetest;
+package com.example.airqualitytest;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -22,7 +22,8 @@ import android.content.Intent;
 import android.os.SystemClock;
 
 public class OnBootReceiver extends BroadcastReceiver {
-  private static final int PERIOD= 60000 * 5;   // 5 minutes
+  private static final int PERIOD= 60000;   // 1 minute
+  //private static final int PERIOD= 60000 * 5;   // 5 minutes
   
   @Override
   public void onReceive(Context context, Intent intent) {

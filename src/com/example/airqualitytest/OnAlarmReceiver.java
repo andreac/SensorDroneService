@@ -12,7 +12,7 @@
   limitations under the License.
 */
 
-package com.example.sensordronetest;
+package com.example.airqualitytest;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

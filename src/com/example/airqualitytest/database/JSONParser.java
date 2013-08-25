@@ -1,4 +1,4 @@
-package com.example.database;
+package com.example.airqualitytest.database;
 
 import java.io.BufferedReader;
 import java.io.IOException;

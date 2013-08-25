@@ -8,20 +8,39 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+       
+        android:id="@+id/llButton"
+        
+        android:orientation="vertical" >
+    
+    
+    <Button
+        android:id="@+id/btnDisconnect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"
+        android:text="Disconnect" />
+    
     <Button
         android:id="@+id/btnService"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
         android:text="Connect" />
 
-
+	</LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnService"
+        android:layout_below="@+id/llButton"
         android:id="@+id/mainLayout"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"

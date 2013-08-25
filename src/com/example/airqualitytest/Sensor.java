@@ -1,4 +1,4 @@
-package com.example.sensordronetest;
+package com.example.airqualitytest;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -10,14 +10,17 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.example.airqualitytest.database.DBmanager;
+import com.example.airqualitytest.database.JsonManagerBroadcast;
+
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v4.content.LocalBroadcastManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
-import com.example.database.DBmanager;
-import com.example.database.JsonManagerBroadcast;
+
 
 
 
@@ -26,7 +29,7 @@ public class Sensor implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static final String url = "http://www.example.yourserver.com/ws/saveSensorData/";
+	private static final String url = "http://collector-svil.mobileterritoriallab.eu/sensordrone/ws/saveSensorData/";
 	String Temperature = null;
 	String irTemperature = null;
 	String Humidity = null;
@@ -42,7 +45,9 @@ public class Sensor implements Serializable {
 	static LocalBroadcastManager broadcaster;
 	static final public String READ_PARAMETERS = "com.sensorDroneTest.READ_PARAMETERS";
 
-	
+	private final static String MY_PREFERENCES = "MyPref";
+    // Costante relativa al nome della particolare preferenza
+    private final static String TEXT_DATA_KEY = "LastUpdate";
 	
 	
 	
@@ -150,9 +155,12 @@ public class Sensor implements Serializable {
 			broadcaster = LocalBroadcastManager.getInstance(cxt);
 			Log.d(TAG, broadcaster.toString());
 			Intent intent = new Intent(READ_PARAMETERS);
-			if (dataArray != null)
+			if (dataArray != null && dataArray.size()>=12)
 				intent.putExtra(READ_PARAMETERS, dataArray);
 			broadcaster.sendBroadcast(intent);
+			
+			
+			saveArray(cxt, dataArray);
 
 			DBmanager db = new DBmanager(cxt);
 			db.open(); // apriamo il db
@@ -169,6 +177,26 @@ public class Sensor implements Serializable {
 		}
 
 	}
+	
+	
+	public static boolean saveArray(Context cxt, ArrayList<String> data)
+	{
+		SharedPreferences sp = cxt.getSharedPreferences(MY_PREFERENCES, Context.MODE_PRIVATE);
+		SharedPreferences.Editor mEdit1= sp.edit();
+	         mEdit1.putInt("Status_size",data.size()); /*sKey is an array*/ 
+
+	    for(int i=0;i<data.size();i++)  
+	    {
+
+	        mEdit1.remove("Status_" + i);
+	        mEdit1.putString("Status_" + i, data.get(i));  
+	    }
+
+	    return mEdit1.commit();     
+	}
+	
+	
+	
 
 	public String getTemperature() {
 		return Temperature;

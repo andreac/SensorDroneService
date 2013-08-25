@@ -1,4 +1,4 @@
-package com.example.database;
+package com.example.airqualitytest.database;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

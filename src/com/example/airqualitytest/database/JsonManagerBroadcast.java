@@ -1,4 +1,4 @@
-package com.example.database;
+package com.example.airqualitytest.database;
 
 import org.json.JSONObject;
 
