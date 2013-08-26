@@ -14,7 +14,7 @@
 
 package com.example.airqualitytest;
 
-import android.annotation.SuppressLint;
+import android.support.v4.app.NotificationCompat;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.bluetooth.BluetoothAdapter;
@@ -57,6 +57,8 @@ public class AppService extends WakefulIntentService {
     public boolean lowbatNotify;
     public DroneConnectionHelper myHelper;
     public DroneEventHandler droneHandler;
+    
+    Object lock;
 	
 	public AppService() {
 		super("AppService");
@@ -143,6 +145,7 @@ public class AppService extends WakefulIntentService {
                 }else if (droneEventObject.matches(DroneEventObject.droneEventType.HUMIDITY_MEASURED)) {
                     float humidity = myDrone.humidity_Percent ;
                     Log.d(TAG, humidity + " humidity");
+                    saveData(0, Float.toString(humidity));
                     
                 }
                 else if (droneEventObject.matches(DroneEventObject.droneEventType.PRESSURE_ENABLED)) {
@@ -150,6 +153,7 @@ public class AppService extends WakefulIntentService {
                 }else if (droneEventObject.matches(DroneEventObject.droneEventType.PRESSURE_MEASURED)) {
                     float pressure = myDrone.pressure_Atmospheres ;
                     Log.d(TAG, pressure + " pressure");
+                    saveData(1, Float.toString(pressure));
                     
                 }
                 else if (droneEventObject.matches(DroneEventObject.droneEventType.IR_TEMPERATURE_ENABLED)) {
@@ -157,6 +161,7 @@ public class AppService extends WakefulIntentService {
                 }else if (droneEventObject.matches(DroneEventObject.droneEventType.IR_TEMPERATURE_MEASURED)) {
                     float temp = myDrone.irTemperature_Celsius ;
                     Log.d(TAG, temp + " irTemp");
+                    saveData(2, Float.toString(temp));
                     
                 }
                 else if (droneEventObject.matches(DroneEventObject.droneEventType.PRECISION_GAS_ENABLED)) {
@@ -164,6 +169,7 @@ public class AppService extends WakefulIntentService {
                 }else if (droneEventObject.matches(DroneEventObject.droneEventType.PRECISION_GAS_MEASURED)) {
                     float gas = myDrone.precisionGas_ppmCarbonMonoxide ;
                     Log.d(TAG, gas + " gas");
+                    saveData(3, Float.toString(gas));
                     
                 }
                 else if (droneEventObject.matches(DroneEventObject.droneEventType.ALTITUDE_ENABLED)) {
@@ -172,6 +178,7 @@ public class AppService extends WakefulIntentService {
                 }else if (droneEventObject.matches(DroneEventObject.droneEventType.ALTITUDE_MEASURED)) {
                     float altitude = myDrone.altitude_Meters ;
                     Log.d(TAG, altitude + " altitude");
+                    saveData(4, Float.toString(altitude));
                     
                 }
             }// parseEvent
@@ -200,45 +207,52 @@ public class AppService extends WakefulIntentService {
 				
 			}
 		}
-		
+		lock = new Object();
+
+        synchronized (lock) {
+            // Give 10 seconds to complete task, then give up.
+            // To take less time, call a sync'ed lock.notify();
+            // when your are done in droneEventHandler.
+            try {
+                lock.wait(10000);
+                
+                //doOnDisconnect();
+            } catch (InterruptedException e) {
+                Log.d(TAG,"I took longer than 10s; giving up!");
+            }
+        }
 		
 	}
-//	private void readData(){
-//		
-//			Log.d(TAGC, "connesso");
-//			for (int i = 0; i < qsSensors.length; i++) {
-//				streamerList[i].run();
-//			}
-//	}
+
 	
 	private boolean saveData(int param, String Value){
-		
+		Log.d(TAG, "save data: " + param + " value: " + Value);
 		switch (param) {
 		case 7:
 			sensorObj.setADC(Value);
 			break;
-		case 8:
+		case 4:
 			sensorObj.setAltitude(Value);
 			break;
 		case 6:
 			sensorObj.setCapacitance(Value);
 			break;
-		case 1:
+		case 0:
 			sensorObj.setHumidity(Value);
 			break;
-		case 2:
+		case 1:
 			sensorObj.setPressure(Value);
 			break;
-		case 5:
+		case 3:
 			sensorObj.setPrecision_GAS(Value);
 			break;
-		case 3:
+		case 2:
 			sensorObj.setIrTemperature(Value);
 			break;
-		case 4:
+		case 8:
 			sensorObj.setRGBC(Value);
 			break;
-		case 0:
+		case 5:
 			sensorObj.setTemperature(Value);
 			break;
 		case 9:
@@ -251,6 +265,7 @@ public class AppService extends WakefulIntentService {
 			break;
 		}
 		if(sensorObj.saveData(cxt)){
+			//lock.notifyAll();
 			doOnDisconnect();
 		}
 		
@@ -299,9 +314,10 @@ public class AppService extends WakefulIntentService {
 	
 	
 	
-	@SuppressLint("NewApi")
+	
 	private void alertMessage(String message){
-		Notification noti = new Notification.Builder(cxt)
+		
+		Notification not = new NotificationCompat.Builder(cxt)
 				.setContentTitle("Sensor Drone")
 				.setContentText(message)
 				.setSmallIcon(R.drawable.ic_launcher).build();
@@ -309,9 +325,9 @@ public class AppService extends WakefulIntentService {
 		NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
 		// Hide the notification after its selected
-		noti.flags |= Notification.FLAG_AUTO_CANCEL;
+		not.flags |= Notification.FLAG_AUTO_CANCEL;
 
-		notificationManager.notify(0, noti);
+		notificationManager.notify(0, not);
 	}
 	
 	@Override

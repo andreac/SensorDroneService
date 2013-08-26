@@ -11,6 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.example.airqualitytest.database.DBmanager;
+import com.example.airqualitytest.database.JSONParser;
 import com.example.airqualitytest.database.JsonManagerBroadcast;
 
 import android.content.Context;
@@ -29,7 +30,7 @@ public class Sensor implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static final String url = "http://example-server.com/sensordrone/ws/saveSensorData/";
+	private static final String url = "http://your-server-url.com/sensordrone/ws/saveSensorData/";
 	String Temperature = null;
 	String irTemperature = null;
 	String Humidity = null;
@@ -94,6 +95,7 @@ public class Sensor implements Serializable {
 	}
 
 	public void buildArray() {
+		Log.d(TAG, "build array");
 		dataArray = new ArrayList<String>();
 		dataArray.add(getTemperature());
 		dataArray.add(getHumidity());
@@ -114,8 +116,13 @@ public class Sensor implements Serializable {
 
 	public Boolean saveData(Context cxt) {
 
-		if (this.getHumidity() != null && this.getTemperature() != null && this.getPrecision_GAS() != null && this.getPressure() != null
-				&& this.getAltitude() != null && this.getADC() != null && this.getOxidizingGas() != null && this.getReducingGas() != null) {
+		if (this.getHumidity() != null && 
+				this.getIrTemperature() != null && 
+				this.getPrecision_GAS() != null && 
+				this.getPressure() != null && 
+				this.getAltitude() != null 
+				) {
+			
 			this.buildArray();
 
 			JSONObject listFinal = new JSONObject();
@@ -150,7 +157,16 @@ public class Sensor implements Serializable {
 			}
 			
 			Log.d(TAG, listFinal.toString());
-			JsonManagerBroadcast jmB = new JsonManagerBroadcast(url, listFinal, cxt);
+			
+			int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+			if (currentapiVersion <= 10){
+				new JSONParser().getJSONObjectFromUrl(url, listFinal);
+			} else{
+				JsonManagerBroadcast jmB = new JsonManagerBroadcast(url, listFinal, cxt);
+			}
+			
+			
+			
 
 			broadcaster = LocalBroadcastManager.getInstance(cxt);
 			Log.d(TAG, broadcaster.toString());
