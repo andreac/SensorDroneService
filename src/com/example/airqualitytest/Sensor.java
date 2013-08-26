@@ -29,7 +29,7 @@ public class Sensor implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static final String url = "http://collector-svil.mobileterritoriallab.eu/sensordrone/ws/saveSensorData/";
+	private static final String url = "http://example-server.com/sensordrone/ws/saveSensorData/";
 	String Temperature = null;
 	String irTemperature = null;
 	String Humidity = null;
